@@ -1,0 +1,51 @@
+From 26058820caf86bc4206d800109f881365b9ebcfa Mon Sep 17 00:00:00 2001
+From: arseniiarsenii <arseniivelichko2@gmail.com>
+Date: Thu, 10 Nov 2022 12:51:42 +0300
+Subject: [PATCH] feat: Added 'py' to test dependencies, added
+ musllinux_aarch64 specs to CI
+
+---
+ .github/workflows/ci.yaml | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/.github/workflows/ci.yaml b/.github/workflows/ci.yaml
+index 2ec3681..0297e72 100644
+--- a/.github/workflows/ci.yaml
++++ b/.github/workflows/ci.yaml
+@@ -68,6 +68,24 @@ jobs:
+         - spec: cp311-manylinux_ppc64le
+           foreign_arch: true
+           test_args: '{project}/c'
++        - spec: cp36-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
++        - spec: cp37-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
++        - spec: cp38-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
++        - spec: cp39-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
++        - spec: cp310-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
++        - spec: cp311-musllinux_aarch64
++          foreign_arch: true
++          test_args: '{project}/c'
+     steps:
+     - name: clone repo
+       uses: actions/checkout@v2
+@@ -94,7 +112,7 @@ jobs:
+         CIBW_MANYLINUX_X86_64_IMAGE: ${{ matrix.manylinux_img || '' }}
+         CIBW_MANYLINUX_I686_IMAGE: ${{ matrix.manylinux_img || '' }}
+         CIBW_PRERELEASE_PYTHONS: 'True'
+-        CIBW_TEST_REQUIRES: pytest
++        CIBW_TEST_REQUIRES: pytest py
+         CIBW_TEST_COMMAND: PYTHONUNBUFFERED=1 python -m pytest ${{ matrix.test_args || '{project}' }}  # default to test all
+       run: |
+         python -m pip install --upgrade "${{ matrix.cibw_version || 'cibuildwheel' }}"
+-- 
+2.38.1
+
